@@ -23,13 +23,12 @@ export default function DisplayQuiz({ questionList }) {
   const [answers, setAnswers] = useState({});
   const [showHint, setShowHint] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [isNext, setIsNext] = useState(true); // Track if it's the next question (for animation direction)
+  const [isNext, setIsNext] = useState(true);
 
   const currentQuestion = questionList[currentQuestionIndex];
 
   const handleAnswer = (selectedOption) => {
     setAnswers((prev) => {
-      // Toggle option on double-click
       if (prev[currentQuestionIndex] === selectedOption) {
         const updatedAnswers = { ...prev };
         delete updatedAnswers[currentQuestionIndex];
@@ -50,13 +49,13 @@ export default function DisplayQuiz({ questionList }) {
   };
 
   const handleNext = () => {
-    setIsNext(true); // Set direction to forward
+    setIsNext(true);
     setCurrentQuestionIndex((prev) => prev + 1);
     setShowHint(false);
   };
 
   const handlePrev = () => {
-    setIsNext(false); // Set direction to backward
+    setIsNext(false);
     setCurrentQuestionIndex((prev) => prev - 1);
     setShowHint(false);
   };
@@ -92,21 +91,21 @@ export default function DisplayQuiz({ questionList }) {
 
   if (quizCompleted) {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="p-10 max-w-3xl mx-auto text-center shadow-xl">
-            <h1 className="text-4xl font-bold mb-6 text-blue-600 dark:text-blue-400">
+          <Card className="p-6 sm:p-10 max-w-lg sm:max-w-3xl mx-auto text-center shadow-xl">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-blue-600 dark:text-blue-400">
               🎉 Congratulations! 🎉
             </h1>
-            <p className="text-2xl mb-6 dark:text-gray-300">
+            <p className="text-xl sm:text-2xl mb-6 dark:text-gray-300">
               Your final score is:
             </p>
             <motion.p
-              className="text-5xl font-bold text-green-600 dark:text-green-400"
+              className="text-4xl sm:text-5xl font-bold text-green-600 dark:text-green-400"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200 }}
@@ -114,7 +113,7 @@ export default function DisplayQuiz({ questionList }) {
               {score}
             </motion.p>
             <Button
-              className="bg-black dark:bg-white dark:text-black text-white text-lg px-8 py-4 rounded-md shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105 mt-6"
+              className="bg-black dark:bg-white dark:text-black text-white text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-md shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105 mt-6"
               onClick={handleRestart}
             >
               Restart Quiz
@@ -126,8 +125,8 @@ export default function DisplayQuiz({ questionList }) {
   }
 
   return (
-    <div className="container mx-auto px-6 py-12">
-      <Card className="p-8 max-w-3xl mx-auto shadow-2xl">
+    <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <Card className="p-6 sm:p-8 max-w-lg sm:max-w-3xl mx-auto shadow-2xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -135,15 +134,15 @@ export default function DisplayQuiz({ questionList }) {
           transition={{ duration: 0.3 }}
           className="mb-6"
         >
-          <div className="flex justify-between items-center mb-6">
-            <span className="text-lg font-medium text-gray-700 dark:text-gray-400">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+            <span className="text-sm sm:text-lg font-medium text-gray-700 dark:text-gray-400">
               Question {currentQuestionIndex + 1} of {questionList.length}
             </span>
-            <span className="text-lg font-semibold dark:text-gray-300">
+            <span className="text-sm sm:text-lg font-semibold dark:text-gray-300">
               Score: {score}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
             {currentQuestion.question}
           </h2>
         </motion.div>
@@ -151,10 +150,10 @@ export default function DisplayQuiz({ questionList }) {
         {/* Options */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${currentQuestionIndex}-${isNext}`} // Use both currentQuestionIndex and isNext as the key
-            initial={isNext ? { x: 50, opacity: 0 } : { x: -50, opacity: 0 }} // Direction based on isNext
+            key={`${currentQuestionIndex}-${isNext}`}
+            initial={isNext ? { x: 50, opacity: 0 } : { x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={isNext ? { x: -50, opacity: 0 } : { x: 50, opacity: 0 }} // Exit direction based on isNext
+            exit={isNext ? { x: -50, opacity: 0 } : { x: 50, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="space-y-4"
           >
@@ -164,7 +163,7 @@ export default function DisplayQuiz({ questionList }) {
                 <Button
                   key={index}
                   variant={isSelected ? "default" : "outline"}
-                  className={`w-full justify-start text-lg text-left transition-all ${
+                  className={`w-full justify-start text-base sm:text-lg text-left transition-all ${
                     isSelected
                       ? "text-white dark:text-black font-bold"
                       : "dark:text-gray-200"
@@ -185,27 +184,36 @@ export default function DisplayQuiz({ questionList }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <p className="text-lg text-gray-700 dark:text-gray-300">
+            <p className="text-sm sm:text-lg text-gray-700 dark:text-gray-300">
               {currentQuestion.hint}
             </p>
           </motion.div>
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between items-center mt-8">
-          <Button variant="outline" onClick={handleHint} disabled={showHint}>
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-8 space-y-3 sm:space-y-0">
+          <Button
+            variant="outline"
+            onClick={handleHint}
+            disabled={showHint}
+            className="w-full sm:w-auto"
+          >
             Show Hint (-5 points)
           </Button>
-          <div className="space-x-3">
+          <div className="flex space-x-3 w-full sm:w-auto">
             {currentQuestionIndex > 0 && (
-              <Button onClick={handlePrev}>Previous</Button>
+              <Button onClick={handlePrev} className="w-full sm:w-auto">
+                Previous
+              </Button>
             )}
             {currentQuestionIndex < questionList.length - 1 ? (
-              <Button onClick={handleNext}>Next</Button>
+              <Button onClick={handleNext} className="w-full sm:w-auto">
+                Next
+              </Button>
             ) : (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button>Submit</Button>
+                  <Button className="w-full sm:w-auto">Submit</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
