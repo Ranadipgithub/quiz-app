@@ -72,6 +72,9 @@ export default function Home() {
           </Button>
         </Link>
       </div>
+      <footer className="mt-12 text-sm text-gray-500 dark:text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Rana. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }
