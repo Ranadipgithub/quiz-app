@@ -73,7 +73,7 @@ export default function DisplayQuiz({ questionList }) {
         }
       }
     });
-
+    
     setScore(finalScore);
     setQuizCompleted(true);
     toast("Quiz Completed!", {

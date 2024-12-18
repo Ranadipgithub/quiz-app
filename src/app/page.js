@@ -1,8 +1,26 @@
-import Link from "next/link";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Zap, Lightbulb } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs"; 
 
 export default function Home() {
+  const { userId } = useAuth(); 
+  const router = useRouter();
+
+  const handleStartQuiz = () => {
+    if (!userId) {
+      toast("You need to sign in first!", {
+        description: "Please log in to access the quiz.",
+      });
+      router.push("/sign-in?redirect_url=/quiz"); 
+    } else {
+      router.push("/quiz");
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 text-center -mt-12 transition-colors duration-300">
       {/* Header */}
@@ -26,7 +44,6 @@ export default function Home() {
           !
         </p>
       </div>
-
       {/* Points Information */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 max-w-md sm:max-w-lg">
         <div className="flex items-center space-x-3 sm:space-x-4 p-4 border rounded-lg shadow-sm bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
@@ -63,14 +80,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Start Quiz Button */}
       <div>
-        <Link href={"/quiz"}>
-          <Button className="bg-black dark:bg-white dark:text-black text-white text-sm sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-md shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">
-            Start Quiz
-          </Button>
-        </Link>
+        <Button
+          onClick={handleStartQuiz} // Handle the button click
+          className="bg-black dark:bg-white dark:text-black text-white text-sm sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-md shadow hover:bg-gray-800 dark:hover:bg-gray-200 transition-transform transform hover:scale-105"
+        >
+          Start Quiz
+        </Button>
       </div>
       <footer className="mt-12 text-sm text-gray-500 dark:text-gray-400">
         <p>&copy; {new Date().getFullYear()} Rana. All Rights Reserved.</p>
