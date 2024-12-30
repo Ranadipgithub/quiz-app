@@ -1,4 +1,13 @@
-const DashboardLoading = () => {
+import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton"; // Assuming you have a Skeleton component
+
+function DashboardLoading() {
   return (
     <div className="min-h-screen">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -7,44 +16,41 @@ const DashboardLoading = () => {
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="text-center md:text-left">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                <div className="bg-gray-300 dark:bg-zinc-700 animate-pulse h-8 w-48 rounded-md"></div>
+                <Skeleton className="w-40 h-8" />
               </h1>
-              <div className="text-gray-600 dark:text-zinc-500 text-lg">
-                <div className="bg-gray-300 dark:bg-zinc-700 animate-pulse h-4 w-64 rounded-md"></div>
-              </div>
+              <p className="text-gray-600 dark:text-zinc-500 text-lg">
+                <Skeleton className="w-64 h-6" />
+              </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(3)].map((_, index) => (
-              <div
+              <Card
                 key={index}
-                className="bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-800 animate-pulse p-4 rounded-md"
+                className="bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-800"
               >
-                <div className="mb-4">
-                  <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-32 rounded-md mb-2"></div>
-                  <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-24 rounded-md"></div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 text-gray-700 dark:text-zinc-300">
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-5 w-5 rounded-full animate-pulse"></div>
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-32 rounded-md animate-pulse"></div>
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg mb-4">
+                    <Skeleton className="w-6 h-6 mx-auto my-auto" />
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-700 dark:text-zinc-300">
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-5 w-5 rounded-full animate-pulse"></div>
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-32 rounded-md animate-pulse"></div>
+                  <Skeleton className="h-6 w-2/3 mb-2" />
+                  <Skeleton className="h-4 w-1/2" />
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[...Array(3)].map((_, idx) => (
+                      <div key={idx} className="flex items-center space-x-3">
+                        <Skeleton className="w-6 h-6 rounded-full" />
+                        <Skeleton className="w-32 h-4" />
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-700 dark:text-zinc-300">
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-5 w-5 rounded-full animate-pulse"></div>
-                    <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-32 rounded-md animate-pulse"></div>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <div className="bg-gray-300 dark:bg-zinc-700 h-10 w-full rounded-md animate-pulse"></div>
-                </div>
-              </div>
+                </CardContent>
+                <CardFooter>
+                  <Skeleton className="w-full h-10" />
+                </CardFooter>
+              </Card>
             ))}
           </div>
         </section>
@@ -53,38 +59,37 @@ const DashboardLoading = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="text-center md:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-              <div className="bg-gray-300 dark:bg-zinc-700 animate-pulse h-8 w-48 rounded-md"></div>
+              <Skeleton className="w-40 h-8" />
             </h1>
-            <div className="mt-1 text-gray-600 dark:text-zinc-400 text-lg">
-              <div className="bg-gray-300 dark:bg-zinc-700 animate-pulse h-4 w-64 rounded-md"></div>
-            </div>
+            <p className="mt-1 text-gray-600 dark:text-zinc-400 text-lg">
+              <Skeleton className="w-64 h-6" />
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(3)].map((_, index) => (
-            <div
+            <Card
               key={index}
-              className="bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-800 animate-pulse p-4 rounded-md"
+              className="bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-800"
             >
-              <div className="w-12 h-12 bg-gray-300 dark:bg-zinc-700 rounded-lg mb-4"></div>
-              <div className="mb-4">
-                <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-32 rounded-md mb-2"></div>
-                <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-24 rounded-md"></div>
-              </div>
-              <div className="space-y-4">
-                <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-48 rounded-md animate-pulse"></div>
-                <div className="bg-gray-300 dark:bg-zinc-700 h-4 w-48 rounded-md animate-pulse"></div>
-              </div>
-              <div className="mt-4">
-                <div className="bg-gray-300 dark:bg-zinc-700 h-10 w-full rounded-md animate-pulse"></div>
-              </div>
-            </div>
+              <CardHeader>
+                <Skeleton className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg mb-4" />
+                <Skeleton className="h-6 w-2/3 mb-2" />
+                <Skeleton className="h-4 w-1/2" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="w-full h-4" />
+              </CardContent>
+              <CardFooter>
+                <Skeleton className="w-full h-10" />
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </main>
     </div>
   );
-};
+}
 
 export default DashboardLoading;

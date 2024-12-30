@@ -156,7 +156,7 @@ export default function DisplayQuiz({ questionList }) {
             animate={{ x: 0, opacity: 1 }}
             exit={isNext ? { x: -50, opacity: 0 } : { x: 50, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="space-y-4"
+            className="space-y-4 max-w-full overflow-hidden"
           >
             {currentQuestion.options.map((option, index) => {
               const isSelected = answers[currentQuestionIndex] === option;
@@ -168,7 +168,7 @@ export default function DisplayQuiz({ questionList }) {
                     isSelected
                       ? "text-white dark:text-black font-bold"
                       : "dark:text-gray-200"
-                  }`}
+                  } max-w-full text-left break-words p-3`}
                   onClick={() => handleAnswer(option)}
                 >
                   {option}

@@ -16,13 +16,13 @@ export default function QuizLoading() {
         }
         return prev + 10;
       });
-    }, 500); 
+    }, 500);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-black text-white px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8">
       <motion.div
         className="text-center"
         initial={{ opacity: 0 }}
