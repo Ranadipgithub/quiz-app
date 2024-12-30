@@ -15,9 +15,9 @@ export default function Home() {
       toast("You need to sign in first!", {
         description: "Please log in to access the quiz.",
       });
-      router.push("/sign-in?redirect_url=/quiz"); 
+      router.push("/sign-in?redirect_url=/dashboard"); 
     } else {
-      router.push("/quiz");
+      router.push("/dashboard");
     }
   };
 

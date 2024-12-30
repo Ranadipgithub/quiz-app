@@ -3,47 +3,56 @@
 import connectToDB from "@/database";
 import Question from "@/models/questions";
 import { NextResponse } from "next/server";
-import data from "../app/data.js"
+import {generateQuestions} from "@/ai";
 
-export async function fetchQuestionsAction() {
+export async function fetchQuestionsAction(quizConfig) {
+  try {
+    const questionsData = await generateQuestions(quizConfig);
+
+    // Ensure questionsData is a serializable plain object
+    const formattedQuestions = JSON.parse(JSON.stringify(questionsData));
+
+    console.log(formattedQuestions);
+
+    return {
+      success: true,
+      data: formattedQuestions, // Ensure this is a plain object or array
+    };
+  } catch (err) {
+    console.error("Error fetching questions:", err);
+    return {
+      success: false,
+      message: "Failed to fetch questions. Please try again.",
+    };
+  }
+}
+
+export async function addQuestionsAction() {
   await connectToDB();
   try {
-    const questionsDB = await Question.find({});
-    if (questionsDB) {
+    const questionsData = await generateQuestions();
+    const formattedQuestionsData = JSON.parse(questionsData);
+    console.log(formattedQuestionsData);
+
+    if (questionsData) {
+      await Question.deleteMany();
+      await Question.insertMany(formattedQuestionsData);
+
       return NextResponse.json({
         success: true,
-        data: JSON.parse(JSON.stringify(questionsDB)),
+        message: "Questions added successfully!",
       });
     } else {
       return NextResponse.json({
         success: false,
-        message: "Some error occurred! Please try again.",
+        message: "Failed to generate questions. Please try again.",
       });
     }
   } catch (err) {
-    console.log(err);
+    console.error("Error adding questions:", err);
     return NextResponse.json({
       success: false,
-      message: "Some error occurred! Please try again.",
+      message: "Failed to add questions. Please try again.",
     });
   }
-}
-
-export async function addQuestionsAction(){
-    await connectToDB();
-    try{
-        await Question.deleteMany();
-        await Question.insertMany(data);
-        return NextResponse.json({
-          success: true,
-          message: "Questions added successfully!",
-        });
-
-    } catch(err){
-        console.log(err);
-        return NextResponse.json({
-            success: false,
-            message: "Some error occurred! Please try again!"
-        })
-    }
 }

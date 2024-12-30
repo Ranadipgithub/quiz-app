@@ -26,6 +26,7 @@ export default function DisplayQuiz({ questionList }) {
   const [isNext, setIsNext] = useState(true);
 
   const currentQuestion = questionList[currentQuestionIndex];
+  console.log(currentQuestion);
 
   const handleAnswer = (selectedOption) => {
     setAnswers((prev) => {
@@ -143,7 +144,7 @@ export default function DisplayQuiz({ questionList }) {
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-            {currentQuestion.question}
+            {currentQuestion?.question}
           </h2>
         </motion.div>
 
