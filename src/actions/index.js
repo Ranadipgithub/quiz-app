@@ -9,14 +9,13 @@ export async function fetchQuestionsAction(quizConfig) {
   try {
     const questionsData = await generateQuestions(quizConfig);
 
-    // Ensure questionsData is a serializable plain object
     const formattedQuestions = JSON.parse(JSON.stringify(questionsData));
 
     console.log(formattedQuestions);
 
     return {
       success: true,
-      data: formattedQuestions, // Ensure this is a plain object or array
+      data: formattedQuestions, 
     };
   } catch (err) {
     console.error("Error fetching questions:", err);
