@@ -210,7 +210,12 @@ export default function DisplayQuiz({ questionList, time }) {
                         : "dark:text-gray-200"
                     } break-words p-3`}
                     onClick={() => handleAnswer(option)}
-                    style={{ wordWrap: "break-word", whiteSpace: "normal" }} // Ensure wrapping for long text
+                    style={{
+                      height: "auto",
+                      minHeight: "3rem",
+                      whiteSpace: "normal",
+                      padding: "0.75rem 1rem",
+                    }} // Ensure wrapping for long text
                   >
                     {option}
                   </Button>
