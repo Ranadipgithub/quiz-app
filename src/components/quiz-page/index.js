@@ -145,7 +145,7 @@ export default function DisplayQuiz({ questionList, time }) {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-      <Card className="p-6 sm:p-8 max-w-lg sm:max-w-3xl mx-auto shadow-2xl h-full">
+      <Card className="p-6 sm:p-8 max-w-lg sm:max-w-3xl mx-auto shadow-2xl h-full w-full">
         <div className="flex flex-col space-y-4 h-full overflow-y-auto max-h-[calc(100vh-4rem)]">
           {/* Header */}
           <motion.div
@@ -196,7 +196,7 @@ export default function DisplayQuiz({ questionList, time }) {
               animate={{ x: 0, opacity: 1 }}
               exit={isNext ? { x: -50, opacity: 0 } : { x: 50, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="space-y-3" // Reduced space between options
+              className="space-y-3"
             >
               {currentQuestion.options.map((option, index) => {
                 const isSelected = answers[currentQuestionIndex] === option;
@@ -208,8 +208,9 @@ export default function DisplayQuiz({ questionList, time }) {
                       isSelected
                         ? "text-white dark:text-black font-bold"
                         : "dark:text-gray-200"
-                    } max-w-full text-left break-words p-3`}
+                    } break-words p-3`}
                     onClick={() => handleAnswer(option)}
+                    style={{ wordWrap: "break-word", whiteSpace: "normal" }} // Ensure wrapping for long text
                   >
                     {option}
                   </Button>
@@ -221,7 +222,7 @@ export default function DisplayQuiz({ questionList, time }) {
           {/* Hint Section */}
           {showHint && (
             <motion.div
-              className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-md" // Reduced top margin
+              className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >

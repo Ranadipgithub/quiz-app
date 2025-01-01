@@ -15,11 +15,13 @@ function DashboardLoading() {
         <section className="mb-16">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="text-center md:text-left">
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                <Skeleton className="w-40 h-8" />
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-zinc-500 mb-2">
+                {/* <Skeleton className="w-40 h-8" /> */}
+                Upcoming Quizzes
               </h1>
               <p className="text-gray-600 dark:text-zinc-500 text-lg">
-                <Skeleton className="w-64 h-6" />
+                {/* <Skeleton className="w-64 h-6" /> */}
+                Challenge yourself with our latest quizzes
               </p>
             </div>
           </div>
@@ -58,11 +60,13 @@ function DashboardLoading() {
         {/* Explore Our Quizzes Section Skeleton */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="text-center md:text-left">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-              <Skeleton className="w-40 h-8" />
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-zinc-500 mb-2">
+              {/* <Skeleton className="w-40 h-8" /> */}
+              Explore Our Quizzes
             </h1>
             <p className="mt-1 text-gray-600 dark:text-zinc-400 text-lg">
-              <Skeleton className="w-64 h-6" />
+              {/* <Skeleton className="w-64 h-6" /> */}
+              Test your knowledge in various topics
             </p>
           </div>
         </div>

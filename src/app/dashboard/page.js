@@ -74,7 +74,7 @@ function Dashboard() {
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                 Upcoming Quizzes
               </h1>
-              <p className="text-gray-600 dark:text-zinc-500 text-lg">
+              <p className="text-gray-600 dark:text-zinc-400 text-lg">
                 Challenge yourself with our latest quizzes
               </p>
             </div>
