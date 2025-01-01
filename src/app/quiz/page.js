@@ -31,15 +31,15 @@ export default function QuizPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  console.log("quizConfig", quizConfig);
+
   useEffect(() => {
     const fetchQuestions = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        // Call the server action
         const result = await fetchQuestionsAction(quizConfig);
-
         if (result.success && Array.isArray(result.data)) {
           setQuestionList(result.data); // Update state with the questions
         } else {
@@ -63,7 +63,7 @@ export default function QuizPage() {
       {loading && <QuizLoading/>}
 
       {!loading && !error && questionList.length > 0 && (
-        <DisplayQuiz questionList={questionList} />
+        <DisplayQuiz questionList={questionList} time={quizConfig?.time*60}/>
       )}
       {!loading && !error && questionList.length === 0 && (
         <p>No questions available.</p>

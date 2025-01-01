@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -16,17 +16,34 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Timer } from "lucide-react";
 
-export default function DisplayQuiz({ questionList }) {
+export default function DisplayQuiz({ questionList, time }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showHint, setShowHint] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isNext, setIsNext] = useState(true);
+  const [remainingTime, setRemainingTime] = useState(time); // Initialize timer
 
   const currentQuestion = questionList[currentQuestionIndex];
   console.log(currentQuestion);
+  console.log(time);
+
+  useEffect(() => {
+    if (remainingTime > 0 && !quizCompleted) {
+      const timer = setInterval(() => {
+        setRemainingTime((prev) => prev - 1);
+      }, 1000);
+
+      return () => clearInterval(timer); // Cleanup on unmount
+    }
+
+    if (remainingTime === 0) {
+      handleSubmit(); // Auto-submit when time is up
+    }
+  }, [remainingTime, quizCompleted]);
 
   const handleAnswer = (selectedOption) => {
     setAnswers((prev) => {
@@ -74,7 +91,7 @@ export default function DisplayQuiz({ questionList }) {
         }
       }
     });
-    
+
     setScore(finalScore);
     setQuizCompleted(true);
     toast("Quiz Completed!", {
@@ -88,6 +105,7 @@ export default function DisplayQuiz({ questionList }) {
     setAnswers({});
     setQuizCompleted(false);
     setShowHint(false);
+    setRemainingTime(time); // Reset timer
   };
 
   if (quizCompleted) {
@@ -146,6 +164,27 @@ export default function DisplayQuiz({ questionList }) {
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
             {currentQuestion?.question}
           </h2>
+          <div
+            className={`flex items-center space-x-2 text-sm sm:text-lg font-semibold ${
+              remainingTime <= 60
+                ? "text-red-600 dark:text-red-400" // Red when 1 minute or less
+                : "text-green-600 dark:text-green-400" // Green for other times
+            }`}
+          >
+            <Timer
+              className={`h-6 w-6 ${
+                remainingTime <= 60
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-green-600 dark:text-green-400"
+              }`}
+            />
+            <span>
+              {Math.floor(remainingTime / 60)}:
+              {remainingTime % 60 < 10
+                ? `0${remainingTime % 60}`
+                : remainingTime % 60}
+            </span>
+          </div>
         </motion.div>
 
         {/* Options */}

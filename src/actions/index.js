@@ -3,10 +3,12 @@
 import connectToDB from "@/database";
 import Question from "@/models/questions";
 import { NextResponse } from "next/server";
-import {generateQuestions} from "@/ai";
+import { generateQuestions } from "@/ai";
 
 export async function fetchQuestionsAction(quizConfig) {
   try {
+    console.log("quizConfig", quizConfig);
+
     const questionsData = await generateQuestions(quizConfig);
 
     const formattedQuestions = JSON.parse(JSON.stringify(questionsData));
@@ -15,7 +17,7 @@ export async function fetchQuestionsAction(quizConfig) {
 
     return {
       success: true,
-      data: formattedQuestions, 
+      data: formattedQuestions,
     };
   } catch (err) {
     console.error("Error fetching questions:", err);
