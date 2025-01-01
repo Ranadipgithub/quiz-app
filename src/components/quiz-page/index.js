@@ -145,7 +145,7 @@ export default function DisplayQuiz({ questionList, time }) {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-      <Card className="p-6 sm:p-8 max-w-lg sm:max-w-3xl mx-auto shadow-2xl h-full w-full">
+      <Card className="p-6 sm:p-8 max-w-md sm:max-w-3xl mx-auto shadow-2xl h-full w-full">
         <div className="flex flex-col space-y-4 h-full overflow-y-auto max-h-[calc(100vh-4rem)]">
           {/* Header */}
           <motion.div
