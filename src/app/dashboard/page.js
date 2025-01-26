@@ -30,39 +30,22 @@ import {
 import { container, item } from "@/lib/animations";
 import { upcomingQuizzes } from "../../data/upcomingQuizzes.js";
 import { exploreQuizzes } from "../../data/exploreQuizzes.js";
-import generateQuestions from "@/ai/index.js";
 import Link from "next/link.js";
 import { QuizConfigContext } from "@/context";
-import DashboardLoading from "@/loading/dashboardLoading"
 
 function Dashboard() {
   const [open, setOpen] = useState(false);
   const { quizConfig, setQuizConfig } = useContext(QuizConfigContext);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate a delay
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
 
   const handleSelectQuiz = (quiz) => {
     setQuizConfig({
-      noOfQuestions: "10", // To be set via dialog input
-      difficulty: "Medium", // To be set via dialog input
-      time: "5", // To be set via dialog input
-      type: quiz.type, // From the selected quiz
+      noOfQuestions: "10", 
+      difficulty: "Medium", 
+      time: "5", 
+      type: quiz.type,
     });
-    setOpen(true); // Open the dialog
+    setOpen(true); 
   };
-
-  if (loading) {
-    return <DashboardLoading />; // Render the loading skeleton
-  }
 
   return (
     <div className="min-h-screen">
@@ -258,10 +241,11 @@ function Dashboard() {
                             className="mt-1 w-full"
                           />
                         </div>
-
+                        
                         <div className="flex justify-end mt-4">
                           <Link href={"/quiz"}>
                             <Button>Generate Quiz</Button>
+                            
                           </Link>
                         </div>
                       </div>

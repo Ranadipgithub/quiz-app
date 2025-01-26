@@ -17,8 +17,16 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Timer } from "lucide-react";
+import { QuizConfigContext } from "@/context";
+import { fetchQuestionsAction } from "@/actions";
 
-export default function DisplayQuiz({ questionList, time }) {
+async function fetchQ(quizConfig) {
+  const response = await fetchQuestionsAction(quizConfig);
+  const questionList = await response.json();
+  return questionList;
+}
+
+export default function DisplayQuiz({ questionList , time}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -28,8 +36,6 @@ export default function DisplayQuiz({ questionList, time }) {
   const [remainingTime, setRemainingTime] = useState(time); // Initialize timer
 
   const currentQuestion = questionList[currentQuestionIndex];
-  console.log(currentQuestion);
-  console.log(time);
 
   useEffect(() => {
     if (remainingTime > 0 && !quizCompleted) {
@@ -37,11 +43,11 @@ export default function DisplayQuiz({ questionList, time }) {
         setRemainingTime((prev) => prev - 1);
       }, 1000);
 
-      return () => clearInterval(timer); // Cleanup on unmount
+      return () => clearInterval(timer); 
     }
 
     if (remainingTime === 0) {
-      handleSubmit(); // Auto-submit when time is up
+      handleSubmit(); 
     }
   }, [remainingTime, quizCompleted]);
 

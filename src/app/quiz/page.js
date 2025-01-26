@@ -4,15 +4,15 @@
 // import { QuizConfigContext } from "@/context";
 
 // export default async function QuizPage() {
-//   // await addQuestionsAction();
-//   const {quizConfig} = useContext(QuizConfigContext);
-//   const response = await fetchQuestionsAction(quizConfig);
-//   const questionList = await response.json();
-//   console.log(questionList);
+//   // // await addQuestionsAction();
+//   // const {quizConfig} = useContext(QuizConfigContext);
+//   // const response = await fetchQuestionsAction(quizConfig);
+//   // const questionList = await response.json();
+//   // console.log(questionList);
 
 //   return (
 //     <div>
-//       <DisplayQuiz questionList={questionList.data} />
+//       <DisplayQuiz/>
 //     </div>
 //   );
 // }
@@ -20,13 +20,13 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { fetchQuestionsAction } from "@/actions"; // Import the server action
+import { fetchQuestionsAction } from "@/actions"; 
 import { QuizConfigContext } from "@/context";
 import DisplayQuiz from "@/components/quiz-page";
 import QuizLoading from "@/loading/quizLoading";
 
 export default function QuizPage() {
-  const { quizConfig } = useContext(QuizConfigContext); // Context for quizConfig
+  const { quizConfig } = useContext(QuizConfigContext);
   const [questionList, setQuestionList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,7 +41,7 @@ export default function QuizPage() {
       try {
         const result = await fetchQuestionsAction(quizConfig);
         if (result.success && Array.isArray(result.data)) {
-          setQuestionList(result.data); // Update state with the questions
+          setQuestionList(result.data); 
         } else {
           setError(result.message || "Failed to fetch questions.");
         }

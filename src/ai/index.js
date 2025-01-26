@@ -44,4 +44,3 @@ export async function generateQuestions(quizConfig){
     return "An error occurred while generating the content.";
   }
 };
-
